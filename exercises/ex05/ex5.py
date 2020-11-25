@@ -10,9 +10,7 @@ from typing import Tuple
 
 
 def count_occurrences(data: list, valid: tuple, thresh: float) -> dict:
-    occurrences = {}
-    for v in valid:
-        occurrences[v] = 0
+    occurrences = {v: 0 for v in valid}
     for _, base, quality in data:
         if base in valid and quality >= thresh:
             occurrences[base] += 1
@@ -32,7 +30,7 @@ def count_bases_and_subsequence(data_as_string: str, subsequence: str) -> Tuple[
     sep = ';'
     comment = '%'
     invalid_tuple = '_;_;-1.0'
-    lines = data_as_string.split('\n')
+    lines = data_as_string.splitlines()
     data_section = lines[lines.index(header_end):lines.index(data_end)]
     data_lines = [line.lower() if (line.strip() and not line.startswith(comment)) else invalid_tuple
                   for line in data_section]
