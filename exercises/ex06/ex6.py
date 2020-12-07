@@ -5,11 +5,11 @@ Matr.Nr.: K11709064
 Exercise 6
 """
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, Iterator
 
 
-def get_hamsters(folderpath: str) -> Tuple[str, str]:
-    files = sorted(Path(folderpath).glob('**/*.raw.seq'))
+def get_hamsters(folderpath: str) -> Iterator[Tuple[str, str]]:
+    files = sorted(Path(folderpath).rglob('*.raw.seq'))
     yield from ((file.name, file.read_text()) for file in files)
 
 
